@@ -1,10 +1,13 @@
 package csci498.lunchlist;
 
+
+
 public class Restaurant {
 
 	private String name = "";
 	private String address = "";
-	
+	private String type="";
+
 	public String getName() { 
 		return(name);
 	}
@@ -21,4 +24,16 @@ public class Restaurant {
 		this.address = address;
 	}
 	
+	public String getType(){
+		return(type);
+	}
+	
+	public String toString(){
+		return(getName());
+	}
+	
+	
+	public void setType(String type) { 
+		this.type = type;
+	}
 }
