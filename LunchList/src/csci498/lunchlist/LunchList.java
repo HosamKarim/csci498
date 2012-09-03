@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,7 +35,7 @@ public class LunchList extends Activity {
         
         save.setOnClickListener(onSave);
         
-        Spinner list = (Spinner)findViewById(R.id.restaurants);
+        ListView list = (ListView)findViewById(R.id.restaurants);
         
         adapter = new RestaurantAdapter();
         
@@ -42,22 +43,11 @@ public class LunchList extends Activity {
                 findViewById(R.id.addr);
         
         list.setAdapter(adapter);
-		
-        /*RadioGroup rg = (RadioGroup)findViewById(R.id.types);
-		for(int i=1;i<9;i++)
-		{
-			RadioButton rb = new RadioButton(getBaseContext());
-			rb.setText("Test#"+i);
-			rb.setTextColor(Color.rgb(5*i, 5*i, 5*i));
-			rg.addView(rb);
-		}*/
-        
     }
     
     private View.OnClickListener onSave = new View.OnClickListener() {
     	public void onClick(View c){
     		Restaurant r = new Restaurant();
-    		//model.add(r);
     		EditText name = (EditText)findViewById(R.id.name);
     		EditText address = (EditText)findViewById(R.id.addr);
     		
@@ -65,8 +55,6 @@ public class LunchList extends Activity {
     		r.setAddress(address.getText().toString());
     		
     		RadioGroup types = (RadioGroup)findViewById(R.id.types);
-    		
-    		
     		
     		switch (types.getCheckedRadioButtonId()) {	
     			case R.id.sit_down:
@@ -91,31 +79,22 @@ public class LunchList extends Activity {
     	RestaurantAdapter(){
     		super(LunchList.this,android.R.layout.simple_list_item_1,model);
     	}
-    		public View getView (int position, View convertView, ViewGroup parent){
-    			View row = convertView;
+    	public View getView(int position, View convertView, ViewGroup parent) {
+    		View row=convertView;
+    		RestaurantHolder holder=null;
+    		
+    		if (row==null) {
+    			LayoutInflater inflater=getLayoutInflater();
+    			row=inflater.inflate(R.layout.row, parent, false); 
+    			holder=new RestaurantHolder(row); 
+    			row.setTag(holder);
+    		}
+    		else {
+    			holder=(RestaurantHolder)row.getTag(); 
+    		}
+    		holder.populateFrom(model.get(position)); 
     			
-    			if(row==null){
-    				LayoutInflater inflater = getLayoutInflater();
-    				
-    				row =  inflater.inflate(R.layout.row, null);
-    			}
-    			
-    			Restaurant r = model.get(position);
-    			((TextView)row.findViewById(R.id.title)).setText(r.getName());
-    			((TextView)row.findViewById(R.id.address)).setText(r.getAddress());
-    			
-    			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-    			
-    			if (r.getType().equals("sit_down")){
-    				icon.setImageResource(R.drawable.ball_red);
-    			}
-    			else if (r.getType().equals("take_out")){
-    				icon.setImageResource(R.drawable.ball_yellow);
-    			} 
-    			else{
-    				icon.setImageResource(R.drawable.ball_green);
-    			}
-    			return (row);
+    		return(row);
     		}
     	
     }
