@@ -3,6 +3,7 @@ package csci498.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.TabActivity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,8 +22,10 @@ import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TabHost;
+import android.widget.AdapterView;
 
-public class LunchList extends Activity {
+public class LunchList extends TabActivity {
 	List <Restaurant> model = new ArrayList <Restaurant>();
 	RestaurantAdapter adapter = null;
 	
@@ -43,7 +46,28 @@ public class LunchList extends Activity {
                 findViewById(R.id.addr);
         
         list.setAdapter(adapter);
+        
+        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+        
+        spec.setContent(R.id.restaurants);
+        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+        getTabHost().addTab(spec);
+        
+        spec = getTabHost().newTabSpec("tag2");
+        spec.setContent(R.id.details);
+        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+        getTabHost().addTab(spec);
+        getTabHost().setCurrentTab(0);
+        
+        list.setOnItemClickListener(onListClick);
+        
+        
     }
+    private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
+    	public void onItemClick (AdapterView<?> parent,View view, int position, long id){
+    		
+    	}
+	};
     
     private View.OnClickListener onSave = new View.OnClickListener() {
     	public void onClick(View c){
@@ -92,6 +116,7 @@ public class LunchList extends Activity {
     		else {
     			holder=(RestaurantHolder)row.getTag(); 
     		}
+    		
     		holder.populateFrom(model.get(position)); 
     			
     		return(row);
