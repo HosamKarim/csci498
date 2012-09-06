@@ -59,12 +59,15 @@ public class LunchList extends TabActivity {
         
         spec.setContent(R.id.restaurants);
         spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+        
         getTabHost().addTab(spec);
         
         spec = getTabHost().newTabSpec("tag2");
         spec.setContent(R.id.details);
         spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+        
         getTabHost().addTab(spec);
+        
         getTabHost().setCurrentTab(0);
         
         list.setOnItemClickListener(onListClick);
@@ -87,6 +90,8 @@ public class LunchList extends TabActivity {
     		else {
     			types.check(R.id.delivery);
     		}
+    		
+    		getTabHost().setCurrentTab(1);
     	}
 	};
     
