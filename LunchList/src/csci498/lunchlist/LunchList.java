@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ public class LunchList extends TabActivity {
 	EditText name=null;
 	EditText address=null;
 	RadioGroup types=null;
+	EditText notes=null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,8 @@ public class LunchList extends TabActivity {
         name = (EditText)findViewById(R.id.name);
         address = (EditText)findViewById(R.id.addr);
         types = (RadioGroup)findViewById(R.id.types);
-        
+        notes = (EditText)findViewById(R.id.notes);
+
         Button save = (Button)findViewById(R.id.save);
         
         save.setOnClickListener(onSave);
@@ -80,6 +83,7 @@ public class LunchList extends TabActivity {
     		
     		name.setText(r.getName());
     		address.setText(r.getAddress());
+    		notes.setText(r.getNotes());
     		
     		if(r.getType().equals("sit_down")){
     			types.check(R.id.sit_down);
@@ -98,11 +102,14 @@ public class LunchList extends TabActivity {
     private View.OnClickListener onSave = new View.OnClickListener() {
     	public void onClick(View c){
     		Restaurant r = new Restaurant();
+    		
     		EditText name = (EditText)findViewById(R.id.name);
     		EditText address = (EditText)findViewById(R.id.addr);
+    		EditText notes = (EditText)findViewById(R.id.notes);
     		
     		r.setName(name.getText().toString());
     		r.setAddress(address.getText().toString());
+    		r.setNotes(notes.getText().toString());
     		
     		RadioGroup types = (RadioGroup)findViewById(R.id.types);
     		
@@ -187,7 +194,7 @@ public class LunchList extends TabActivity {
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_lunch_list, menu);
-        return true;
+    	new MenuInflater(this).inflate(R.menu.option, menu); 
+    	return(super.onCreateOptionsMenu(menu));
     }
 }
