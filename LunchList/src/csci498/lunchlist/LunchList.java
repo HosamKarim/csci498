@@ -7,12 +7,14 @@ import android.app.TabActivity;
 //import android.app.Activity;
 //import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -36,10 +38,11 @@ public class LunchList extends TabActivity {
 	EditText notes=null;
 	RadioGroup types=null;
 	Restaurant current=null;
-	
+	int progress;
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_lunch_list);
         
         name = (EditText)findViewById(R.id.name);
@@ -187,7 +190,17 @@ public class LunchList extends TabActivity {
     	
     }
     
+    private void doSomeLongWork(final int incr){
+    	SystemClock.sleep(250);
+    }
     
+    private Runnable longTask = new Runnable() {
+    	public void run() {
+    		for (int i=0;i<20;i++) {
+    			doSomeLongWork(500);
+    		}
+    	}
+    };
 		
 	public void onClick(View v) {
 			// TODO Auto-generated method stub
