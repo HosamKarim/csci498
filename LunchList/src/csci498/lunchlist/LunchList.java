@@ -79,9 +79,8 @@ public class LunchList extends TabActivity {
         getTabHost().setCurrentTab(0);
         
         list.setOnItemClickListener(onListClick);
-        
-        
     }
+    
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
     	public void onItemClick (AdapterView<?> parent,View view, int position, long id){
     		 current = model.get(position);
@@ -217,11 +216,16 @@ public class LunchList extends TabActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	if (item.getItemId()==R.id.toast) {
     		String message="No restaurant selected";
-    	if (current!=null) { 
-    		message=current.getNotes();
-    	}
-    	Toast.makeText(this, message, Toast.LENGTH_LONG).show(); 
+    		
+    		if (current!=null) { 
+    			message=current.getNotes();
+    		}
+    	
+    		Toast.makeText(this, message, Toast.LENGTH_LONG).show(); 
     		return(true);
+    	}
+    	else if (item.getItemId()==R.id.run){
+    		new Thread(longTask).start();
     	}
     	return(super.onOptionsItemSelected(item)); }
 }
