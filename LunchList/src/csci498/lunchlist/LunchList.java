@@ -3,9 +3,13 @@ package csci498.lunchlist;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.TabActivity;
 //import android.app.Activity;
+//import android.view.View.OnClickListener;
 //import android.graphics.Color;
+//import android.app.AlertDialog;
+//import android.widget.Spinner;
+//import android.widget.RadioButton;
+import android.app.TabActivity;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -18,13 +22,10 @@ import android.view.Window;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-//import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-//import android.widget.Spinner;
-//import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TabHost;
@@ -39,6 +40,7 @@ public class LunchList extends TabActivity {
 	RadioGroup types=null;
 	Restaurant current=null;
 	int progress;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -234,7 +236,8 @@ public class LunchList extends TabActivity {
     			message=current.getNotes();
     		}
     	
-    		Toast.makeText(this, message, Toast.LENGTH_LONG).show(); 
+    		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    	
     		return(true);
     	}
     	else if (item.getItemId()==R.id.run){
@@ -242,6 +245,14 @@ public class LunchList extends TabActivity {
     		progress=0;
     		new Thread(longTask).start();
     		return(true);
+    	}
+    	
+    	else if (item.getItemId()==R.id.change){
+    		if(getTabHost().getCurrentTabTag().equals("tag1"))
+    			getTabHost().setCurrentTab(1);
+    		else if(getTabHost().getCurrentTabTag().equals("tag2"))
+    			getTabHost().setCurrentTab(0);
+    		
     	}
     	
     	return(super.onOptionsItemSelected(item)); }

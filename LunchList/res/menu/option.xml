@@ -8,4 +8,7 @@
     		android:title="Run Long Task"
     		android:icon="@drawable/run"
   		/>
-</menu>
+  		<item android:id="@+id/change" 
+  		    android:title="Switch">
+  		</item>
+	</menu>
