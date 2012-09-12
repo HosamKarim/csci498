@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -34,12 +35,14 @@ import android.widget.AdapterView;
 public class LunchList extends TabActivity {
 	List <Restaurant> model = new ArrayList <Restaurant>();
 	RestaurantAdapter adapter = null;
-	EditText name=null;
-	EditText address=null;
-	EditText notes=null;
-	RadioGroup types=null;
-	Restaurant current=null;
+	EditText name = null;
+	EditText address = null;
+	EditText notes = null;
+	DatePicker dPicker = null;
+	RadioGroup types = null;
+	Restaurant current = null;
 	int progress;
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,8 @@ public class LunchList extends TabActivity {
         address = (EditText)findViewById(R.id.addr);
         types = (RadioGroup)findViewById(R.id.types);
         notes = (EditText)findViewById(R.id.notes);
-
+        dPicker = (DatePicker)findViewById(R.id.date);
+        
         Button save = (Button)findViewById(R.id.save);
         
         save.setOnClickListener(onSave);
@@ -90,6 +94,7 @@ public class LunchList extends TabActivity {
     		name.setText(current.getName());
     		address.setText(current.getAddress());
     		notes.setText(current.getNotes());
+    		dPicker.updateDate(current.getYear(), current.getMonth(), current.getDay());
     		
     		if(current.getType().equals("sit_down")){
     			types.check(R.id.sit_down);
@@ -112,7 +117,11 @@ public class LunchList extends TabActivity {
     		EditText name = (EditText)findViewById(R.id.name);
     		EditText address = (EditText)findViewById(R.id.addr);
     		EditText notes = (EditText)findViewById(R.id.notes);
+    		DatePicker dPicker = (DatePicker)findViewById(R.id.date);
     		
+    		current.setDay(dPicker.getDayOfMonth());
+    		current.setMonth(dPicker.getMonth());
+    		current.setYear(dPicker.getYear());
     		current.setName(name.getText().toString());
     		current.setAddress(address.getText().toString());
     		current.setNotes(notes.getText().toString());

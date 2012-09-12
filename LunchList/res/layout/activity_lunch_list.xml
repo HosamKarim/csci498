@@ -37,6 +37,10 @@
 	           <AutoCompleteTextView android:id="@+id/addr" />
 	         </TableRow>
 	         <TableRow>
+	           <TextView android:text="Date:" />
+	           <DatePicker android:id="@+id/date" />
+	         </TableRow>
+	         <TableRow>
 	           <TextView android:text="Type:" />
 	           <RadioGroup android:id="@+id/types">
 	             <RadioButton android:id="@+id/take_out"
