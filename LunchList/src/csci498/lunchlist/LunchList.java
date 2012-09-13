@@ -2,6 +2,7 @@ package csci498.lunchlist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 //import android.app.Activity;
 //import android.view.View.OnClickListener;
@@ -42,7 +43,7 @@ public class LunchList extends TabActivity {
 	RadioGroup types = null;
 	Restaurant current = null;
 	int progress;
-	
+	AtomicBoolean isActive = new AtomicBoolean(true);
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -213,8 +214,8 @@ public class LunchList extends TabActivity {
     
     private Runnable longTask = new Runnable() {
     	public void run() {
-    		for (int i=0;i<100;i++) {
-    			doSomeLongWork(500);
+    		for (int i=progress; i<1000 && isActive.get(); i+=200) {
+    			doSomeLongWork(200);
     		}
     		
     		runOnUiThread(new Runnable() { 
@@ -225,6 +226,12 @@ public class LunchList extends TabActivity {
     		});
     	}
     };
+    
+    public void onPause(){
+    	super.onPause();
+    	
+    	isActive.set(false);
+    }
 		
 	public void onClick(View v) {
 			// TODO Auto-generated method stub
