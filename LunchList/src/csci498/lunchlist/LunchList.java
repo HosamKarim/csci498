@@ -213,13 +213,14 @@ public class LunchList extends TabActivity {
     
     private Runnable longTask = new Runnable() {
     	public void run() {
-    		for (int i=0;i<20;i++) {
+    		for (int i=0;i<100;i++) {
     			doSomeLongWork(500);
     		}
     		
     		runOnUiThread(new Runnable() { 
     			public void run() {
     				setProgressBarVisibility(false); 
+    				
     			}
     		});
     	}
@@ -260,8 +261,11 @@ public class LunchList extends TabActivity {
     		if(getTabHost().getCurrentTabTag().equals("tag1"))
     			getTabHost().setCurrentTab(1);
     		else if(getTabHost().getCurrentTabTag().equals("tag2"))
-    			getTabHost().setCurrentTab(0);
-    		
+    			getTabHost().setCurrentTab(0);	
+    	}
+    	
+    	else if(item.getItemId()==R.id.clear){
+    		adapter.clear();
     	}
     	
     	return(super.onOptionsItemSelected(item)); }

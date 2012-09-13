@@ -11,4 +11,7 @@
   		<item android:id="@+id/change" 
   		    android:title="Switch">
   		</item>
+  		<item android:id="@+id/clear" 
+  		    android:title="CLEAR List">
+  		</item>
 	</menu>
