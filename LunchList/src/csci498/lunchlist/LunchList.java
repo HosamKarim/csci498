@@ -115,11 +115,6 @@ public class LunchList extends TabActivity {
     	public void onClick(View c){
     		 current = new Restaurant();
     		
-    		EditText name = (EditText)findViewById(R.id.name);
-    		EditText address = (EditText)findViewById(R.id.addr);
-    		EditText notes = (EditText)findViewById(R.id.notes);
-    		DatePicker dPicker = (DatePicker)findViewById(R.id.date);
-    		
     		current.setDay(dPicker.getDayOfMonth());
     		current.setMonth(dPicker.getMonth());
     		current.setYear(dPicker.getYear());
@@ -154,16 +149,16 @@ public class LunchList extends TabActivity {
     	}
     	public View getView(int position, View convertView, ViewGroup parent) {
     		View row=convertView;
-    		RestaurantHolder holder=null;
+    		RestaurantHolder holder = null;
     		
     		if (row==null) {
     			LayoutInflater inflater=getLayoutInflater();
     			row=inflater.inflate(R.layout.row, parent, false); 
-    			holder=new RestaurantHolder(row); 
+    			holder = new RestaurantHolder(row); 
     			row.setTag(holder);
     		}
     		else {
-    			holder=(RestaurantHolder)row.getTag(); 
+    			holder = (RestaurantHolder)row.getTag(); 
     		}
     		
     		holder.populateFrom(model.get(position)); 
@@ -214,25 +209,44 @@ public class LunchList extends TabActivity {
     
     private Runnable longTask = new Runnable() {
     	public void run() {
-    		for (int i=progress; i<1000 && isActive.get(); i+=200) {
+    		for (int i=progress; i<10000 && isActive.get(); i+=200) {
     			doSomeLongWork(200);
     		}
     		
-    		runOnUiThread(new Runnable() { 
-    			public void run() {
-    				setProgressBarVisibility(false); 
-    				
-    			}
-    		});
+    		if (isActive.get()){
+    			runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						setProgressBarVisibility(false);
+						progress = 0;
+					}
+				});
+    		}
+    		
     	}
     };
     
+    // PAUSING and RESUMING the progress
     public void onPause(){
     	super.onPause();
     	
     	isActive.set(false);
     }
+    
+    public void onResume(){
+    	super.onResume();
+    	
+    	isActive.set(true);
+    	
+    	if (progress>0)
+    		startWork();
+    }
 		
+    public void startWork(){
+    	setProgressBarVisibility(true);
+    	new Thread(longTask).start();
+    }
+    
 	public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
@@ -258,9 +272,8 @@ public class LunchList extends TabActivity {
     		return(true);
     	}
     	else if (item.getItemId()==R.id.run){
-    		setProgressBarVisibility(true);
-    		progress=0;
-    		new Thread(longTask).start();
+    		startWork();
+    		
     		return(true);
     	}
     	
