@@ -42,12 +42,15 @@ public class LunchList extends TabActivity {
 	DatePicker dPicker = null;
 	RadioGroup types = null;
 	Restaurant current = null;
+	RestaurantHelper helper = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	
         setContentView(R.layout.activity_lunch_list);
+        
+        helper = new RestaurantHelper(this);
         
         name = (EditText)findViewById(R.id.name);
         address = (EditText)findViewById(R.id.addr);
@@ -192,6 +195,12 @@ public class LunchList extends TabActivity {
     		}
     	}
     	
+    }
+    
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();
+    	helper.close();
     }
     
 }
