@@ -114,16 +114,7 @@ public class LunchList extends TabActivity {
     
     private View.OnClickListener onSave = new View.OnClickListener() {
     	public void onClick(View c){
-    		 current = new Restaurant();
-    		
-    		current.setDay(dPicker.getDayOfMonth());
-    		current.setMonth(dPicker.getMonth());
-    		current.setYear(dPicker.getYear());
-    		current.setName(name.getText().toString());
-    		current.setAddress(address.getText().toString());
-    		current.setNotes(notes.getText().toString());
-    		
-    		RadioGroup types = (RadioGroup)findViewById(R.id.types);
+    		String type = null;
     		
     		switch (types.getCheckedRadioButtonId()) {	
     			case R.id.sit_down:
@@ -139,7 +130,8 @@ public class LunchList extends TabActivity {
     				break;
 
     		}
-    		adapter.add(current);
+    		helper.insert(name.getText().toString(), address.getText().toString(), type,
+    				notes.getText().toString());
     	}
     	
     };
