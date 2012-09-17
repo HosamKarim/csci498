@@ -158,7 +158,7 @@ public class LunchList extends TabActivity {
     			row.setTag(holder);
     		}
     		else {
-    			holder = (RestaurantHolder)row.getTag(); 
+    			holder= (RestaurantHolder)row.getTag(); 
     		}
     		
     		holder.populateFrom(model.get(position)); 
