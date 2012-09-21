@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<menu xmlns:android="http://schemas.android.com/apk/res/android">
- 		 <item android:id="@+id/toast"
-  			android:title="Raise Toast"
-			android:icon="@drawable/toast"
-  		/>
-  		<item android:id="@+id/run"
-    		android:title="Run Long Task"
-    		android:icon="@drawable/run"
-  		/>
-  		<item android:id="@+id/change" 
-  		    android:title="Switch">
-  		</item>
-  		<item android:id="@+id/clear" 
-  		    android:title="CLEAR List">
-  		</item>
-	</menu>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/add"
+    android:title="Add"
+    android:icon="@drawable/ic_menu_add"
+  />
+</menu>
