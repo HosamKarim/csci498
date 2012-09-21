@@ -48,24 +48,30 @@ public class LunchList extends ListActivity {
 	RadioGroup types = null;
 	Restaurant current = null;
 	RestaurantHelper helper = null;
-
+	public final static String ID_EXTRA="apt.tutorial._ID";
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState); 
     	setContentView(R.layout.activity_lunch_list);
+    	
     	helper = new RestaurantHelper(this); 
     	model = helper.getAll(); 
     	startManagingCursor(model); 
     	adapter = new RestaurantAdapter(model);
+    	
     	setListAdapter(adapter);
     }
     
-    private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
-    	public void onItemClick (AdapterView<?> parent,View view, int position, long id) {
-    		Intent i=new Intent(LunchList.this, DetailForm.class);
-    		startActivity(i);
-    	}
-	};
+    @Override
+   	public void onListItemClick(ListView list, View view,
+   			int position, long id) { 
+   		Intent i=new Intent(LunchList.this, DetailForm.class);
+   		
+   		i.putExtra(ID_EXTRA, String.valueOf(id));
+   		
+   		startActivity(i); 
+   		}
     
     class RestaurantAdapter extends CursorAdapter{
     	RestaurantAdapter(Cursor c){
