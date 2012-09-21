@@ -72,6 +72,18 @@ public class DetailForm extends Activity {
 				case R.id.delivery:
 					type = "delivery";
 			}
+			
+			if (restaurantId==null) {
+				helper.insert(name.getText().toString(), address.getText().toString()
+						, type, notes.getText().toString());
+			}
+			else {
+				helper.update(restaurantId, name.getText().toString(),
+						address.getText().toString(), type,
+						notes.getText().toString());
+			}
+			
+			finish();
 		}
 	};
 	
