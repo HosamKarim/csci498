@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 //import android.widget.RadioButton;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -94,23 +95,9 @@ public class LunchList extends TabActivity {
     }
     
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
-    	public void onItemClick (AdapterView<?> parent,View view, int position, long id){
-    		
-    		name.setText(helper.getName(model));
-    		address.setText(helper.getAddress(model));
-    		notes.setText(helper.getNotes(model));
-    		
-    		if(current.getType().equals("sit_down")){
-    			types.check(R.id.sit_down);
-    		}
-    		else if (current.getType().equals("take_out")){
-    			types.check(R.id.take_out);
-    		}
-    		else {
-    			types.check(R.id.delivery);
-    		}
-    		
-    		getTabHost().setCurrentTab(1);
+    	public void onItemClick (AdapterView<?> parent,View view, int position, long id) {
+    		Intent i=new Intent(LunchList.this, DetailForm.class);
+    		startActivity(i);
     	}
 	};
     

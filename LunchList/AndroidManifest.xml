@@ -6,7 +6,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
-    <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
+    <supports-screens android:largeScreens="true" 
+        android:normalScreens="true" 
+        android:smallScreens="false"/>
 
     <application
         android:icon="@drawable/one"
@@ -21,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="DetailForm"></activity>
     </application>
 
 </manifest>
