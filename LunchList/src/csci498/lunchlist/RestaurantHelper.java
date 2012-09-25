@@ -56,8 +56,8 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		getWritableDatabase().update("restaurants", cv, "_ID=?", args);
 	}
 	
-	public Cursor getAll() {
-		return (getReadableDatabase().rawQuery("Select _id, name, address, type, notes from restaurants ORDER BY name" , null ));
+	public Cursor getAll(String orderBy) {
+		return (getReadableDatabase().rawQuery("Select _id, name, address, type, notes from restaurants ORDER BY "+orderBy , null ));
 	}
 	
 	public String getName(Cursor c) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,10 +41,12 @@ import android.widget.RadioGroup;
 import android.widget.DatePicker;
 
 public class LunchList extends ListActivity {
+	public final static String ID_EXTRA="apt.tutorial._ID";
 	Cursor model = null;
 	RestaurantAdapter adapter = null;
 	RestaurantHelper helper = null;
-	public final static String ID_EXTRA="apt.tutorial._ID";
+	SharedPreferences prefs = null;
+
 	//EditText name = null;
 	//EditText address = null;
 	//EditText notes = null;
@@ -53,10 +57,11 @@ public class LunchList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState); 
+    	prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	setContentView(R.layout.activity_lunch_list);
     	
     	helper = new RestaurantHelper(this); 
-    	model = helper.getAll(); 
+    	model = helper.getAll(prefs.getString("sort_order", "name")); 
     	startManagingCursor(model); 
     	adapter = new RestaurantAdapter(model);
     	
