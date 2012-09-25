@@ -57,15 +57,16 @@ public class LunchList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState); 
-    	prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	setContentView(R.layout.activity_lunch_list);
     	
-    	helper = new RestaurantHelper(this); 
-    	model = helper.getAll(prefs.getString("sort_order", "name")); 
-    	startManagingCursor(model); 
-    	adapter = new RestaurantAdapter(model);
-    	
-    	setListAdapter(adapter);
+    	helper = new RestaurantHelper(this);
+    	prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	initList();
+    	prefs.registerOnSharedPreferenceChangeListener(prefListener);
+    	//model = helper.getAll(prefs.getString("sort_order", "name")); 
+    	//startManagingCursor(model); 
+    	//adapter = new RestaurantAdapter(model);
+    	//setListAdapter(adapter);
     }
     
     @Override
@@ -97,6 +98,27 @@ public class LunchList extends ListActivity {
    		
    		startActivity(i); 
    		}
+    
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener=
+    		new SharedPreferences.OnSharedPreferenceChangeListener() {
+    	public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, 
+    		String key) {
+    			if (key.equals("sort_order")) {
+    				initList();
+    			} 
+    		}
+    };
+    
+    private void initList() { 
+    	if (model!=null) {
+    		stopManagingCursor(model);
+    		model.close();
+    	}
+    	model=helper.getAll(prefs.getString("sort_order", "name")); 
+    	startManagingCursor(model);
+    	adapter=new RestaurantAdapter(model); 
+    	setListAdapter(adapter);
+    	}
     
     class RestaurantAdapter extends CursorAdapter{
     	RestaurantAdapter(Cursor c){
