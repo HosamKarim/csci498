@@ -76,7 +76,10 @@ public class LunchList extends ListActivity {
     	
     		return (true);
     	}
-    	
+    	else if (item.getItemId()==R.id.prefs) { 
+    		startActivity(new Intent(this, EditPreferences.class));
+        	return(true);
+    	}
     	return (super.onOptionsItemSelected(item));
     }
     
