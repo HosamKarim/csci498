@@ -54,7 +54,7 @@ public class DetailForm extends Activity {
 		name.setText(helper.getName(c));
 		address.setText(helper.getAddress(c));
 		notes.setText(helper.getNotes(c));
-		feed.setText(helper.getFeed(c));
+		feed.setText(helper.getFeed(c)); 
 		
 		if (helper.getType(c).equals("sit_down")) {
 			types.check(R.id.sit_down);
@@ -118,7 +118,7 @@ public class DetailForm extends Activity {
 			if (isNetworkAvailable()) {
 				Intent i = new Intent(this,FeedActivity.class);
 				
-				i.putExtra(FeedActivity.FEED.URL, feed.getText().toString());
+				i.putExtra(FeedActivity.FEED_URL, feed.getText().toString());
 				startActivity(i);
 			}
 			else {
