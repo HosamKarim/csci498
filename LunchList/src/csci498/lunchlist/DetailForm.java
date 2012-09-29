@@ -3,6 +3,8 @@ package csci498.lunchlist;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ public class DetailForm extends Activity {
 	EditText address = null;
 	EditText notes = null;
 	EditText feed = null;
+	
 	RadioGroup types = null;
 	RestaurantHelper helper = null;
 	String restaurantId = null;
@@ -67,7 +70,7 @@ public class DetailForm extends Activity {
 			// TODO Auto-generated method stub
 			String type = null;
 			
-			switch (types.getCheckedRadioButtonId()){
+			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
 					type = "sit_down";
 				case R.id.take_out:
@@ -97,4 +100,10 @@ public class DetailForm extends Activity {
 		helper.close();
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(this).inflate(R.menu.details_option, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
+	
+}
