@@ -9,6 +9,9 @@
     <supports-screens android:largeScreens="true" 
         android:normalScreens="true" 
         android:smallScreens="false"/>
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:icon="@drawable/one"
@@ -19,12 +22,12 @@
             android:label="@string/title_activity_lunch_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="DetailForm"></activity>
-        <activity android:name="EditPreferences"></activity>
+        <activity android:name=".DetailForm"></activity>
+        <activity android:name=".EditPreferences"></activity>
+        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>
