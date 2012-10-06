@@ -10,11 +10,11 @@ import android.content.ContentValues;
 
 class RestaurantHelper extends SQLiteOpenHelper {	
 	
-	private static final String DATABASE_NAME="lunchlist.db"; 
+	private static final String DATABASE_NAME = "lunchlist.db"; 
 	private static final int SCHEMA_VERSION = 2;
 	
 	public RestaurantHelper(Context context) {
-	super(context, DATABASE_NAME, null, SCHEMA_VERSION);
+		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	}
 	  
 	
-	public void insert(String name, String address, String type, String notes, String feed){
+	public void insert(String name, String address, String type, String notes, String feed) {
 		ContentValues cv = new ContentValues();
 		
 		cv.put("name", name);
@@ -44,11 +44,11 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		String[] args = {id};
 		
 		return getReadableDatabase().rawQuery("SELECT _ID, name, address, type, " +
-				"		notes , feed FROM restaurants WHERE _ID=?",args);
+				"notes , feed FROM restaurants WHERE _ID=?",args);
 	}
 	
 	public void update(String id, String name, String address, String type, String notes, String feed) {
-		ContentValues cv=new ContentValues(); 
+		ContentValues cv = new ContentValues(); 
 		String[] args={id};
 		
 		cv.put("name", name); 

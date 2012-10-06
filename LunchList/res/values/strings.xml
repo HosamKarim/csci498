@@ -1,8 +1,36 @@
 <resources>
 
-    <string name="app_name">LunchList</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_lunch_list">LunchList</string>
-
+    <string name ="app_name">LunchList</string>
+    <string name ="hello_world">Hello world!</string>
+    <string name ="menu_settings">Settings</string>
+    <string name ="title_activity_lunch_list">LunchList</string>
+	
+    <string name ="Sit_Down">sit_down</string>
+    <string name ="Take_Out">take_out</string>
+    <string name ="Delivery">delivery</string>
+    
+    <string name ="Sort_Order">sort_order</string>
+    <string name ="Name">name</string>
+    <string name ="Address">address</string>
+    <string name ="Notes">Notes</string>
+    
+    <string name ="Exception">Exception!</string>
+    
+    <string name ="DB_Name">lunchlist.db</string>
+    
+    <string name ="Feed_URL">Feed URL</string>
+    
+    <string name ="TextV_Name">Name:</string>
+    <string name ="TextV_Address">Address:</string>
+    <string name ="TextV_Date">Date:</string>
+    <string name ="TextV_Type">Type:</string>
+    <string name ="TextV_Notes">Notes:</string>
+    <string name ="HintName">Name</string>
+    <string name ="HintNote">Note</string>
+    
+    <string name ="RBtn_Take_Out">Take-Out</string>
+    <string name ="RBtn_Sit_Down">Sit-Down</string>
+    <string name ="RBtn_Delivery">Delivery</string>
+    
+    <string name ="Btn_Save">Save</string>
 </resources>

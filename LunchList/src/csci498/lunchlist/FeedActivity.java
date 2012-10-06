@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 public class FeedActivity extends ListActivity {
 	
-	public static final String FEED_URL="csci498.lunchlist.FEED_URL";
+	public static final String FEED_URL = "csci498.lunchlist.FEED_URL";
 	private InstanceState state = null;
 	
 	@Override
@@ -57,7 +57,7 @@ public class FeedActivity extends ListActivity {
 	private void goBlooey(Throwable t) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		builder.setTitle("Exception!").setMessage(t.toString())
+		builder.setTitle(getString(R.string.Exception)).setMessage(t.toString())
 		.setPositiveButton("OK",null).show();
 	}
 	
@@ -106,8 +106,8 @@ public class FeedActivity extends ListActivity {
 	}
 	
 	private static class InstanceState { 
-		RSSFeed feed=null;
-		FeedTask task=null;
+		RSSFeed feed = null;
+		FeedTask task = null;
 	}
 	
 	public static class FeedTask extends AsyncTask<String, Void, RSSFeed> {

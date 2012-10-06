@@ -56,10 +56,10 @@ public class DetailForm extends Activity {
 		notes.setText(helper.getNotes(c));
 		feed.setText(helper.getFeed(c)); 
 		
-		if (helper.getType(c).equals("sit_down")) {
+		if (helper.getType(c).equals(R.string.Sit_Down)) {
 			types.check(R.id.sit_down);
 		}
-		else if (helper.getType(c).equals("take_out")) {
+		else if (helper.getType(c).equals(R.string.Take_Out)) {
 			types.check(R.id.take_out); 
 		}
 		else { 
@@ -73,16 +73,15 @@ public class DetailForm extends Activity {
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			String type = null;
 			
 			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
-					type = "sit_down";
+					type = getString(R.string.Sit_Down);
 				case R.id.take_out:
-					type = "take_out";
+					type = getString(R.string.Take_Out);
 				case R.id.delivery:
-					type = "delivery";
+					type = getString(R.string.Delivery);
 			}
 			
 			if (restaurantId==null) {
@@ -131,10 +130,9 @@ public class DetailForm extends Activity {
 	}
 
 	private boolean isNetworkAvailable() {
-		ConnectivityManager cm = (ConnectivityManager)
-				getSystemService(CONNECTIVITY_SERVICE);
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo info = cm.getActiveNetworkInfo();
-		return info!=null;
+		return info != null;
 	}
 	
 	

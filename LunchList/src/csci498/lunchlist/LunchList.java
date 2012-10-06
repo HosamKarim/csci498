@@ -41,18 +41,12 @@ import android.widget.RadioGroup;
 import android.widget.DatePicker;
 
 public class LunchList extends ListActivity {
-	public final static String ID_EXTRA="apt.tutorial._ID";
+	
+	public final static String ID_EXTRA = "csci498.lunchlist_ID";//"apt.tutorial._ID";
 	Cursor model = null;
 	RestaurantAdapter adapter = null;
 	RestaurantHelper helper = null;
 	SharedPreferences prefs = null;
-
-	//EditText name = null;
-	//EditText address = null;
-	//EditText notes = null;
-	//DatePicker dPicker = null;
-	//RadioGroup types = null;
-	//Restaurant current = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +57,6 @@ public class LunchList extends ListActivity {
     	prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	initList();
     	prefs.registerOnSharedPreferenceChangeListener(prefListener);
-    	//model = helper.getAll(prefs.getString("sort_order", "name")); 
-    	//startManagingCursor(model); 
-    	//adapter = new RestaurantAdapter(model);
-    	//setListAdapter(adapter);
     }
     
     @Override
@@ -77,46 +67,46 @@ public class LunchList extends ListActivity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	if (item.getItemId()==R.id.add) {
+    	if (item.getItemId() == R.id.add) {
     		startActivity(new Intent(LunchList.this, DetailForm.class));
     	
-    		return (true);
+    		return true;
     	}
-    	else if (item.getItemId()==R.id.prefs) { 
+    	else if (item.getItemId() == R.id.prefs) { 
     		startActivity(new Intent(this, EditPreferences.class));
-        	return(true);
+        	return true;
     	}
-    	return (super.onOptionsItemSelected(item));
+    	return super.onOptionsItemSelected(item);
     }
     
     @Override
    	public void onListItemClick(ListView list, View view,
    			int position, long id) { 
-   		Intent i=new Intent(LunchList.this, DetailForm.class);
+   		Intent i = new Intent(LunchList.this, DetailForm.class);
    		
    		i.putExtra(ID_EXTRA, String.valueOf(id));
    		
    		startActivity(i); 
    		}
     
-    private SharedPreferences.OnSharedPreferenceChangeListener prefListener=
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener = 
     		new SharedPreferences.OnSharedPreferenceChangeListener() {
     	public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, 
     		String key) {
-    			if (key.equals("sort_order")) {
+    			if (key.equals(getString(R.string.Sort_Order))) {
     				initList();
     			} 
     		}
     };
     
     private void initList() { 
-    	if (model!=null) {
+    	if (model != null) {
     		stopManagingCursor(model);
     		model.close();
     	}
-    	model=helper.getAll(prefs.getString("sort_order", "name")); 
+    	model=helper.getAll(prefs.getString(getString(R.string.Sort_Order), getString(R.string.Name))); 
     	startManagingCursor(model);
-    	adapter=new RestaurantAdapter(model); 
+    	adapter = new RestaurantAdapter(model); 
     	setListAdapter(adapter);
     	}
     
@@ -139,12 +129,13 @@ public class LunchList extends ListActivity {
 			
 			row.setTag(holder);
 			
-			return(row);
+			return row;
 		}
     	
     }
     
     static class RestaurantHolder {
+    	
     	private TextView name = null;
     	private TextView address = null;
     	private ImageView icon = null;
@@ -159,10 +150,10 @@ public class LunchList extends ListActivity {
     		name.setText(helper.getName(c));
     		address.setText(helper.getAddress(c));
     	
-    		if (helper.getType(c).equals("sit_down")){
+    		if (helper.getType(c).equals(R.string.Sit_Down)){
     			icon.setImageResource(R.drawable.ball_red);
     		}
-    		else if (helper.getType(c).equals("take_out")) { 
+    		else if (helper.getType(c).equals(R.string.Take_Out)) { 
     			icon.setImageResource(R.drawable.ball_yellow);
     		}
     		else {
