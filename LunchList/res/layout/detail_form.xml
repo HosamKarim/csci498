@@ -39,7 +39,12 @@
 	             />
 	          </RadioGroup>
 	        </TableRow>
-	            <TableRow>
+	       <TableRow>
+	            <TextView android:text="@string/TXTLocation" />
+				<TextView android:id="@+id/location" 
+				    	  android:text="@string/NotSet" />
+	       </TableRow>
+	         <TableRow>
 	  			<TextView android:text="@string/TextV_Notes" />
 	 			<EditText android:id="@+id/notes"
 	 			  	android:inputType="textMultiLine"
@@ -53,11 +58,6 @@
 			<EditText android:id="@+id/feed"
       			android:hint="@string/Feed_URL"
     		/>
-	        <Button android:id="@+id/save"
-	          android:layout_width="match_parent"
-	          android:layout_height="wrap_content"
-	          android:text="@string/Btn_Save"
-	        />
 	      </TableLayout>
 	  </ScrollView>
     

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ public class DetailForm extends Activity {
 	EditText address = null;
 	EditText notes = null;
 	EditText feed = null;
+	TextView location = null;
 	
 	RadioGroup types = null;
 	RestaurantHelper helper = null;
@@ -36,6 +36,7 @@ public class DetailForm extends Activity {
 		notes = (EditText)findViewById(R.id.notes); 
 		feed = (EditText)findViewById(R.id.feed);
 		types = (RadioGroup)findViewById(R.id.types);
+		location = (TextView)findViewById(R.id.location);
 		
 		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
 		
@@ -62,7 +63,10 @@ public class DetailForm extends Activity {
 		else { 
 			types.check(R.id.delivery);
 		}
-	
+		
+		location.setText(String.valueOf(helper.getLatitude(c)) + 
+				"," + String.valueOf(helper.getLongitude(c)));
+		
 		c.close();
 	}
 	

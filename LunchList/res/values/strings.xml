@@ -32,5 +32,7 @@
     <string name ="RBtn_Sit_Down">Sit-Down</string>
     <string name ="RBtn_Delivery">Delivery</string>
     
-    <string name ="Btn_Save">Save</string>
+    <string name ="TXTLocation">Location:</string>
+    <string name ="NotSet">(not set)</string>
+    
 </resources>

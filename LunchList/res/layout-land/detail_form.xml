@@ -11,6 +11,7 @@
    	   <TextView android:text="@string/TextV_Name" />
        <EditText android:id="@+id/name"
          android:layout_span="2"
+         android:hint="@string/HintName"
        />
      </TableRow>
      <TableRow>
@@ -48,11 +49,19 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:hint="@string/Feed_URL"/>
-         <Button android:id="@+id/save"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="@string/Btn_Save"
-         />
+         <LinearLayout
+             android:layout_width="wrap_content"
+      	     android:layout_height="wrap_content"
+  		     android:orientation="horizontal"
+  		     >
+            <TextView android:text="@string/TXTLocation"
+                 android:layout_width="wrap_content"
+      	    	 android:layout_height="wrap_content"/>
+			<TextView android:id="@+id/location" 
+				    android:text="@string/NotSet"
+				    android:layout_width="wrap_content"
+      	     		android:layout_height="wrap_content" />
+         </LinearLayout>
       </LinearLayout>
     </TableRow>
   </TableLayout>
