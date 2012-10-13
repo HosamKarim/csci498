@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -38,8 +37,6 @@ public class DetailForm extends Activity {
 		feed = (EditText)findViewById(R.id.feed);
 		types = (RadioGroup)findViewById(R.id.types);
 		
-		Button save = (Button)findViewById(R.id.save); 
-		save.setOnClickListener(onSave);
 		restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
 		
 		if (restaurantId != null) {
@@ -69,19 +66,20 @@ public class DetailForm extends Activity {
 		c.close();
 	}
 	
-	private View.OnClickListener onSave = new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
+	private void save(){
+		if(name.getText().toString().length() > 0){
 			String type = null;
 			
 			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
 					type = getString(R.string.Sit_Down);
+					break;
 				case R.id.take_out:
 					type = getString(R.string.Take_Out);
+					break;
 				case R.id.delivery:
 					type = getString(R.string.Delivery);
+					break;
 			}
 			
 			if (restaurantId==null) {
@@ -97,6 +95,13 @@ public class DetailForm extends Activity {
 			finish();
 		}
 	};
+	
+	@Override
+	public void onPause() {
+		save();
+		
+		super.onPause();
+	}
 	
 	@Override
 	public void onDestroy() {
