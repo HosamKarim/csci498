@@ -125,6 +125,14 @@ public class DetailForm extends Activity {
 	}
 	
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (restaurantId == null) { 
+			menu.findItem(R.id.location).setEnabled(false);
+		}
+		return(super.onPrepareOptionsMenu(menu)); 
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.feed) {
 			if (isNetworkAvailable()) {
@@ -133,15 +141,18 @@ public class DetailForm extends Activity {
 				i.putExtra(FeedActivity.FEED_URL, feed.getText().toString());
 				startActivity(i);
 			}
-			else if (item.getItemId() == R.id.location) {
-				locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, onLocationChange);
-			}
 			else {
 				Toast.makeText(this, "Sorry, the Internet is NOT available",
 						Toast.LENGTH_LONG).show();
 			}
 			return true;
 		}
+		else if (item.getItemId() == R.id.location) {
+			locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, onLocationChange);
+			
+			return true;
+		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 	
