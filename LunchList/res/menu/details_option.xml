@@ -7,4 +7,5 @@
         <item android:id="@+id/location" 
             android:icon="@drawable/ic_menu_compass" 
             android:title="Save Location"></item>
+        <item android:id="@+id/map" android:icon="@drawable/ic_menu_mapmode" android:title="Show on map"></item>
     </menu>
