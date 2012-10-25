@@ -2,6 +2,7 @@ package csci498.lunchlist;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -15,15 +16,15 @@ public class RestaurantMap extends MapActivity {
 	public static final String EXTRA_LONGITUDE = "csci498.EXTRA_LONGITUDE";
 	public static final String EXTRA_NAME = "csci498.EXTRA_NAME";
 	
-	double lat = getIntent().getDoubleExtra(EXTRA_LATITUDE, 0);
-	double lon = getIntent().getDoubleExtra(EXTRA_LONGITUDE, 0);
-	
 	private MapView map = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
+		
+		double lat = getIntent().getDoubleExtra(EXTRA_LATITUDE, 0);
+		double lon = getIntent().getDoubleExtra(EXTRA_LONGITUDE, 0);
 		
 		map = (MapView)findViewById(R.id.map);
 		map.getController().setZoom(17);
@@ -62,6 +63,15 @@ public class RestaurantMap extends MapActivity {
 		@Override
 		public int size() {
 			return 1;
+		}
+		
+		@Override
+		protected boolean onTap(int i) {
+			Toast.makeText(RestaurantMap.this, 
+					item.getSnippet(),
+					Toast.LENGTH_SHORT).show();
+			
+			return true;
 		}
 	}
 }

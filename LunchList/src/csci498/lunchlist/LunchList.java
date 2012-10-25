@@ -104,7 +104,7 @@ public class LunchList extends ListActivity {
     		stopManagingCursor(model);
     		model.close();
     	}
-    	model=helper.getAll(prefs.getString(getString(R.string.Sort_Order), getString(R.string.Name))); 
+    	model = helper.getAll(prefs.getString(getString(R.string.Sort_Order), getString(R.string.Name))); 
     	startManagingCursor(model);
     	adapter = new RestaurantAdapter(model); 
     	setListAdapter(adapter);

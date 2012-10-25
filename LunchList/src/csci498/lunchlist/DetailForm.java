@@ -112,14 +112,14 @@ public class DetailForm extends Activity {
 	@Override
 	public void onPause() {
 		save();
-		locMgr.removeUpdates(onLocationChange);
+		
 		super.onPause();
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+		locMgr.removeUpdates(onLocationChange);
 		helper.close();
 	}
 	
@@ -158,7 +158,7 @@ public class DetailForm extends Activity {
 			
 			return true;
 		}else if (item.getItemId() == R.id.map) {
-			Intent  i = new Intent(this, Restaurant.class);
+			Intent  i = new Intent(this, RestaurantMap.class);
 			
 			i.putExtra(RestaurantMap.EXTRA_LATITUDE, latitude);
 			i.putExtra(RestaurantMap.EXTRA_LONGITUDE, longitude);
