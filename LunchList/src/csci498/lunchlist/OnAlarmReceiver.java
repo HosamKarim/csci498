@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 public class OnAlarmReceiver extends BroadcastReceiver {
@@ -18,6 +19,8 @@ public class OnAlarmReceiver extends BroadcastReceiver {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctxt);
 		boolean useNotification = prefs.getBoolean("use_notification", true);
 		
+		Vibrator v = (Vibrator) ctxt.getSystemService(Context.VIBRATOR_SERVICE);
+		
 		if (useNotification) {
 			NotificationManager mgr = (NotificationManager)ctxt.getSystemService(Context.NOTIFICATION_SERVICE);
 			Notification note = new Notification(R.drawable.stat_notify_chat, "It's time for lunch", System.currentTimeMillis());
@@ -26,6 +29,8 @@ public class OnAlarmReceiver extends BroadcastReceiver {
 			note.setLatestEventInfo(ctxt, "LunchList", "It'sTime for lunch! Aren't you hungry?", i);
 			note.flags |= Notification.FLAG_AUTO_CANCEL;
 			
+			long [] pattern = {1000, 1000, 1000, 1000};
+			v.vibrate(pattern, -1);
 			mgr.notify(NOTIFY_ME_ID, note);
 		}
 		
