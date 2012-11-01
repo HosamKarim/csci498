@@ -37,6 +37,7 @@
         <activity android:name=".AlarmActivity"></activity>
         
         <service android:name="FeedService"></service>
+        <service android:name="WidgetService"></service>
         
         <receiver 
             android:name=".OnBootReceiver"
@@ -56,6 +57,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider"/>
         </receiver>
+        
     
     </application>
 </manifest>
