@@ -57,6 +57,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider"/>
         </receiver>
+        <service android:permission="android.permission.BIND_REMOTEVIEWS" android:name="ListWidgetService"></service>
         
     
     </application>
