@@ -167,10 +167,10 @@ public class LunchFragment extends ListFragment {
     		name.setText(helper.getName(c));
     		address.setText(helper.getAddress(c));
     	
-    		if (helper.getType(c).equals(R.string.Sit_Down)){
+    		if (helper.getType(c).equals(""+R.string.Sit_Down)) {
     			icon.setImageResource(R.drawable.ball_red);
     		}
-    		else if (helper.getType(c).equals(R.string.Take_Out)) { 
+    		else if (helper.getType(c).equals(""+R.string.Take_Out)) { 
     			icon.setImageResource(R.drawable.ball_yellow);
     		}
     		else {
