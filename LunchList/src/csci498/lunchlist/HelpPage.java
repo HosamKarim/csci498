@@ -14,7 +14,7 @@ public class HelpPage extends Activity{
 		setContentView(R.layout.help);
 		
 		browser = (WebView)findViewById(R.id.webkit);
-		browser.loadUrl("file://android_asset/help.html");
+		browser.loadUrl("file:///android_asset/help.html");
 	}
 
 }

@@ -25,25 +25,27 @@ public final class R {
         public static final int ic_menu_add=0x7f020007;
         public static final int ic_menu_compass=0x7f020008;
         public static final int ic_menu_friendslist=0x7f020009;
-        public static final int ic_menu_mapmode=0x7f02000a;
-        public static final int ic_menu_preferences=0x7f02000b;
-        public static final int icon=0x7f02000c;
-        public static final int list=0x7f02000d;
-        public static final int one=0x7f02000e;
-        public static final int restaurant=0x7f02000f;
-        public static final int run=0x7f020010;
-        public static final int stat_notify_chat=0x7f020011;
-        public static final int toast=0x7f020012;
-        public static final int widget_frame=0x7f020013;
+        public static final int ic_menu_help=0x7f02000a;
+        public static final int ic_menu_mapmode=0x7f02000b;
+        public static final int ic_menu_preferences=0x7f02000c;
+        public static final int icon=0x7f02000d;
+        public static final int list=0x7f02000e;
+        public static final int one=0x7f02000f;
+        public static final int restaurant=0x7f020010;
+        public static final int run=0x7f020011;
+        public static final int stat_notify_chat=0x7f020012;
+        public static final int toast=0x7f020013;
+        public static final int widget_frame=0x7f020014;
     }
     public static final class id {
-        public static final int add=0x7f090014;
+        public static final int add=0x7f090015;
         public static final int addr=0x7f090003;
         public static final int address=0x7f090010;
         public static final int date=0x7f090004;
         public static final int delivery=0x7f090008;
         public static final int details=0x7f090001;
         public static final int feed=0x7f09000b;
+        public static final int help=0x7f090014;
         public static final int icon=0x7f09000e;
         public static final int location=0x7f090009;
         public static final int lunch=0x7f090000;
@@ -52,7 +54,7 @@ public final class R {
         public static final int name=0x7f090002;
         public static final int next=0x7f090011;
         public static final int notes=0x7f09000a;
-        public static final int prefs=0x7f090015;
+        public static final int prefs=0x7f090016;
         public static final int restaurants=0x7f090012;
         public static final int sit_down=0x7f090007;
         public static final int take_out=0x7f090006;
