@@ -10,6 +10,5 @@
       android:id="@+id/prefs"
       android:title="Settings"
       android:icon="@drawable/ic_menu_preferences"
-      
   />
 </menu>

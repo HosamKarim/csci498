@@ -151,6 +151,7 @@ public class LunchFragment extends ListFragment {
     	
     }
     
+    
     static class RestaurantHolder {
     	
     	private TextView name = null;
@@ -167,14 +168,14 @@ public class LunchFragment extends ListFragment {
     		name.setText(helper.getName(c));
     		address.setText(helper.getAddress(c));
     	
-    		if (helper.getType(c).equals(""+R.string.Sit_Down)) {
+    		if (helper.getType(c).equals("sit_down")) {
     			icon.setImageResource(R.drawable.ball_red);
     		}
-    		else if (helper.getType(c).equals(""+R.string.Take_Out)) { 
-    			icon.setImageResource(R.drawable.ball_yellow);
+    		else if (helper.getType(c).equals("delivery")) { 
+    			icon.setImageResource(R.drawable.ball_green); 
     		}
     		else {
-    			icon.setImageResource(R.drawable.ball_green); 
+    			icon.setImageResource(R.drawable.ball_yellow);
     		}
     	}
     	
