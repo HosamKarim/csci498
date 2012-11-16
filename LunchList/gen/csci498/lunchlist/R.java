@@ -68,11 +68,10 @@ public final class R {
         public static final int detail_activity=0x7f030002;
         public static final int detail_form=0x7f030003;
         public static final int help=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int map=0x7f030006;
-        public static final int row=0x7f030007;
-        public static final int widget=0x7f030008;
-        public static final int widget_row=0x7f030009;
+        public static final int map=0x7f030005;
+        public static final int row=0x7f030006;
+        public static final int widget=0x7f030007;
+        public static final int widget_row=0x7f030008;
     }
     public static final class menu {
         public static final int activity_lunch_list=0x7f080000;

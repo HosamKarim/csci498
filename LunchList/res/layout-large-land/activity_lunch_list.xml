@@ -5,7 +5,7 @@
   android:orientation="horizontal"
 >
 <fragment
-    class="csci489.lunchlist.LunchFragment"
+    class="csci498.lunchlist.LunchFragment"
     android:id="@+id/lunch"
     android:layout_width="0dip"
     android:layout_height="match_parent"
