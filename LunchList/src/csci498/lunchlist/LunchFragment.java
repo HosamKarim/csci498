@@ -60,8 +60,8 @@ public class LunchFragment extends ListFragment {
     public void onResume() { 
     	super.onResume();
     	
-    	helper=new RestaurantHelper(getActivity()); 
-    	prefs=PreferenceManager.getDefaultSharedPreferences(getActivity()); 
+    	helper = new RestaurantHelper(getActivity()); 
+    	prefs = PreferenceManager.getDefaultSharedPreferences(getActivity()); 
     	initList(); 
     	prefs.registerOnSharedPreferenceChangeListener(prefListener);
     }
@@ -160,11 +160,13 @@ public class LunchFragment extends ListFragment {
     	
     	private TextView name = null;
     	private TextView address = null;
+    	private TextView phone = null;
     	private ImageView icon = null;
     	
     	RestaurantHolder(View row){
     		name = (TextView) row.findViewById(R.id.title);
     		address = (TextView) row.findViewById(R.id.address);
+    		phone = (TextView) row.findViewById(R.id.phone);
     		icon = (ImageView) row.findViewById(R.id.icon);
     	}
     	

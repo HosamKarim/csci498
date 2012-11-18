@@ -19,7 +19,9 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, address TEXT, type TEXT, notes TEXT, feed TEXT, lat REAL, lon REAL, phone TEXT);");
+		db.execSQL("CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+				" name TEXT, address TEXT, type TEXT, notes TEXT, " +
+				"feed TEXT, lat REAL, lon REAL, phone TEXT);");
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 			db.execSQL("ALTER TABLE restaurants ADD COLUMN lat REAL");
 			db.execSQL("ALTER TABLE restaurants ADD COLUMN lon REAL");
 		}
-		if(oldVersion <3){
+		if(oldVersion <4){
 			db.execSQL("ALTER TABLE restaurants ADD COLUMN phone TEXT");
 		}
 	}
@@ -46,6 +48,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		cv.put("notes", notes);
 		cv.put("feed", feed);
 		cv.put("phone", phone);
+		
 		
 		getWritableDatabase().insert("restaurants", "name", cv);
 	}

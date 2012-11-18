@@ -67,7 +67,7 @@ public class DetailFragment extends Fragment {
 	}
 	
 	public void loadRestaurant(String restaurantId) { 
-		this.restaurantId=restaurantId;
+		this.restaurantId = restaurantId;
 		if (restaurantId!=null) { 
 			load();
 		} 
@@ -76,12 +76,12 @@ public class DetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) { 
-		return(inflater.inflate(R.layout.detail_form, container, false));
+		return inflater.inflate(R.layout.detail_form, container, false);
 	}
 	
 	public static DetailFragment newInstance(long id) { 
-		DetailFragment result=new DetailFragment();
-		Bundle args=new Bundle();
+		DetailFragment result = new DetailFragment();
+		Bundle args = new Bundle();
 		
 		args.putString(ARG_REST_ID, String.valueOf(id)); 
 		result.setArguments(args);
@@ -95,9 +95,10 @@ public class DetailFragment extends Fragment {
 		c.moveToFirst();
 		name.setText(getHelper().getName(c));
 		address.setText(getHelper().getAddress(c));
+		phone.setText(getHelper().getPhone(c));
 		notes.setText(getHelper().getNotes(c));
-		feed.setText(getHelper().getFeed(c)); 
-
+		feed.setText(getHelper().getFeed(c));
+		
 		if (getHelper().getType(c).equals(getString(R.string.Sit_Down))) {
 			types.check(R.id.sit_down);
 		}
@@ -147,8 +148,8 @@ public class DetailFragment extends Fragment {
 	}
 	
 	private RestaurantHelper getHelper() { 
-		if (helper==null) {
-			helper=new RestaurantHelper(getActivity()); 
+		if (helper == null) {
+			helper = new RestaurantHelper(getActivity()); 
 		}
 		   	
 		return(helper);
