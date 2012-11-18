@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetailFragment extends Fragment { 
-	
+
 	private static final String ARG_REST_ID = "csci498.lunchlist.ARG_REST_ID";
 	EditText name = null;
 	EditText address = null;
@@ -41,17 +42,17 @@ public class DetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle state) {
 		super.onCreate(state); 
-		
+
 		setHasOptionsMenu(true);
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState); 
-		
+
 		locMgr = (LocationManager)getActivity().
-					getSystemService(Context.LOCATION_SERVICE);
-		
+				getSystemService(Context.LOCATION_SERVICE);
+
 		name = (EditText)getView().findViewById(R.id.name); 
 		address = (EditText)getView().findViewById(R.id.addr); 
 		phone = (EditText)getView().findViewById(R.id.phone);
@@ -59,13 +60,13 @@ public class DetailFragment extends Fragment {
 		types = (RadioGroup)getView().findViewById(R.id.types);
 		feed = (EditText)getView().findViewById(R.id.feed); 
 		location = (TextView)getView().findViewById(R.id.location);
-		
+
 		Bundle args = getArguments();
 		if(args != null) {
 			loadRestaurant(args.getString(ARG_REST_ID));
 		}
 	}
-	
+
 	public void loadRestaurant(String restaurantId) { 
 		this.restaurantId = restaurantId;
 		if (restaurantId!=null) { 
@@ -78,17 +79,17 @@ public class DetailFragment extends Fragment {
 			Bundle savedInstanceState) { 
 		return inflater.inflate(R.layout.detail_form, container, false);
 	}
-	
+
 	public static DetailFragment newInstance(long id) { 
 		DetailFragment result = new DetailFragment();
 		Bundle args = new Bundle();
-		
+
 		args.putString(ARG_REST_ID, String.valueOf(id)); 
 		result.setArguments(args);
-	    
+
 		return(result);
 	}
-	
+
 	private void load() {
 		Cursor c = getHelper().getById(restaurantId);
 
@@ -98,7 +99,7 @@ public class DetailFragment extends Fragment {
 		phone.setText(getHelper().getPhone(c));
 		notes.setText(getHelper().getNotes(c));
 		feed.setText(getHelper().getFeed(c));
-		
+
 		if (getHelper().getType(c).equals(getString(R.string.Sit_Down))) {
 			types.check(R.id.sit_down);
 		}
@@ -146,22 +147,22 @@ public class DetailFragment extends Fragment {
 
 		}
 	}
-	
+
 	private RestaurantHelper getHelper() { 
 		if (helper == null) {
 			helper = new RestaurantHelper(getActivity()); 
 		}
-		   	
+
 		return(helper);
 	}
 
 	@Override
 	public void onPause() { 
 		save();
-		
+
 		getHelper().close(); 
 		locMgr.removeUpdates(onLocationChange);
-		
+
 		super.onPause(); 
 	}
 
@@ -179,9 +180,12 @@ public class DetailFragment extends Fragment {
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-		if (restaurantId==null) { 
+		if (restaurantId == null) { 
 			menu.findItem(R.id.location).setEnabled(false); 
 			menu.findItem(R.id.map).setEnabled(false);
+		}
+		if (isTelephonyAvailable()) {
+			menu.findItem(R.id.call).setEnabled(true); 
 		}
 	}
 
@@ -217,6 +221,15 @@ public class DetailFragment extends Fragment {
 			startActivity(i);
 
 			return true;
+		}else if (item.getItemId()==R.id.call) {
+			String toDial = "tel:"+phone.getText().toString();
+			if (toDial.length() > 4) {
+				startActivity(new Intent(Intent.ACTION_CALL,
+						Uri.parse(toDial)));
+			} 
+		}
+		else if (item.getItemId()==R.id.help) {
+			startActivity(new Intent(getActivity(), HelpPage.class));
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -225,12 +238,12 @@ public class DetailFragment extends Fragment {
 	LocationListener onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location fix) {
 			getHelper().updateLocation(restaurantId, fix.getLatitude(), fix.getLongitude());
-			
+
 			location.setText(String.valueOf(fix.getLatitude()) +", "
 					+String.valueOf(fix.getLongitude())); 
-			
+
 			locMgr.removeUpdates(onLocationChange);
-			
+
 			Toast.makeText(getActivity(), "Location saved",
 					Toast.LENGTH_LONG).show();
 		}
@@ -253,6 +266,12 @@ public class DetailFragment extends Fragment {
 
 		NetworkInfo info = cm.getActiveNetworkInfo();
 		return info != null;
+	}
+
+	private boolean isTelephonyAvailable(){
+		return getActivity()
+				.getPackageManager() 
+				.hasSystemFeature("android.hardware.telephony");
 	}
 
 
