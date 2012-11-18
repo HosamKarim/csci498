@@ -26,6 +26,7 @@ public class DetailFragment extends Fragment {
 	private static final String ARG_REST_ID = "csci498.lunchlist.ARG_REST_ID";
 	EditText name = null;
 	EditText address = null;
+	EditText phone = null;
 	EditText notes = null;
 	EditText feed = null;
 	TextView location = null;
@@ -53,6 +54,7 @@ public class DetailFragment extends Fragment {
 		
 		name = (EditText)getView().findViewById(R.id.name); 
 		address = (EditText)getView().findViewById(R.id.addr); 
+		phone = (EditText)getView().findViewById(R.id.phone);
 		notes = (EditText)getView().findViewById(R.id.notes); 
 		types = (RadioGroup)getView().findViewById(R.id.types);
 		feed = (EditText)getView().findViewById(R.id.feed); 
@@ -133,12 +135,12 @@ public class DetailFragment extends Fragment {
 
 			if (restaurantId == null) {
 				getHelper().insert(name.getText().toString(), address.getText().toString()
-						, type, notes.getText().toString(), feed.getText().toString());
+						, type, notes.getText().toString(), feed.getText().toString(), phone.getText().toString());
 			}
 			else {
 				getHelper().update(restaurantId, name.getText().toString(),
 						address.getText().toString(), type,
-						notes.getText().toString(), feed.getText().toString());
+						notes.getText().toString(), feed.getText().toString(), phone.getText().toString());
 			}
 
 		}

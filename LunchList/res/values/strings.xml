@@ -22,6 +22,7 @@
     <string name ="Feed_URL">Feed URL</string>
     
     <string name ="TextV_Name">Name:</string>
+    <string name ="TextV_Phone">Phone:</string>
     <string name ="TextV_Address">Address:</string>
     <string name ="TextV_Date">Date:</string>
     <string name ="TextV_Type">Type:</string>
