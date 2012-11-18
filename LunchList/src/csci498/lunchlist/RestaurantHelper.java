@@ -31,10 +31,13 @@ class RestaurantHelper extends SQLiteOpenHelper {
 			db.execSQL("ALTER TABLE restaurants ADD COLUMN lat REAL");
 			db.execSQL("ALTER TABLE restaurants ADD COLUMN lon REAL");
 		}
+		if(oldVersion <3){
+			db.execSQL("ALTER TABLE restaurants ADD COLUMN phone TEXT");
+		}
 	}
 	  
 	
-	public void insert(String name, String address, String type, String notes, String feed) {
+	public void insert(String name, String address, String type, String notes, String feed, String phone) {
 		ContentValues cv = new ContentValues();
 		
 		cv.put("name", name);
@@ -42,6 +45,7 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		cv.put("type", type);
 		cv.put("notes", notes);
 		cv.put("feed", feed);
+		cv.put("phone", phone);
 		
 		getWritableDatabase().insert("restaurants", "name", cv);
 	}
@@ -50,10 +54,10 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		String[] args = {id};
 		
 		return getReadableDatabase().rawQuery("SELECT _ID, name, address, type, " +
-				"notes , feed, lat, lon FROM restaurants WHERE _ID=?",args);
+				"notes , feed, lat, lon, phone FROM restaurants WHERE _ID=?",args);
 	}
 	
-	public void update(String id, String name, String address, String type, String notes, String feed) {
+	public void update(String id, String name, String address, String type, String notes, String feed, String phone) {
 		ContentValues cv = new ContentValues(); 
 		String[] args={id};
 		
@@ -62,12 +66,13 @@ class RestaurantHelper extends SQLiteOpenHelper {
 		cv.put("type", type); 
 		cv.put("notes", notes);
 		cv.put("feed", feed);
+		cv.put("phone", phone);
 		
 		getWritableDatabase().update("restaurants", cv, "_ID=?", args);
 	}
 	
 	public Cursor getAll(String orderBy) {
-		return getReadableDatabase().rawQuery("Select _id, name, address, type, notes, feed, lat, lon from restaurants ORDER BY "+orderBy , null );
+		return getReadableDatabase().rawQuery("Select _id, name, address, type, notes, feed, lat, lon, phone from restaurants ORDER BY "+orderBy , null );
 	}
 	
 	public void updateLocation(String id, double lat, double lon) {
@@ -106,6 +111,10 @@ class RestaurantHelper extends SQLiteOpenHelper {
 	
 	public double getLongitude(Cursor c) {
 		return c.getDouble(7);
+	}
+	
+	public String getPhone(Cursor c) {
+		return c.getString(8);
 	}
 }
 	
